@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>To Do List</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="style.css" />
+        <link rel="shortcut icon" href="assets/favicon.webp" type="image/x-icon" />
+        <script defer src="script.js"></script>
+    </head>
+    <body>
+        <h1 id="title">
+            To Do List in Javascript
+        </h1>
+
+        <div id="add-task-container">
+            <h1 id="add-task-title">Add new task</h1>
+            <input
+                id="task-name-input"
+                maxlength="200"
+                placeholder="Task name"
+                autocomplete="off"
+            />
+            <input
+                id="task-desc-input"
+                maxlength="500"
+                placeholder="Task description(optional)"
+                autocomplete="off"
+            />
+            <button id="add-task-btn">Add</button>
+        </div>
+
+        <div id="search-container">
+            <input type="text" id="search-input" autocomplete="off" placeholder="Pesquisar tarefas"/>
+            <button id="search-btn"><img src="assets/search.png" alt="Pesquisar tarefas..."></button>
+        </div>
+
+        <div id="task-container"></div>
+    </body>
+</html>
