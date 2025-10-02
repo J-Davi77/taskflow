@@ -8,16 +8,14 @@ function renderTasks(arr) {
     list.innerHTML = "";
     const searchValue = searchInput.value.trim().toLowerCase();
 
-
     arr.forEach(({ name, isDone, description }, index) => {
         const status = isDone ? "done" : "";
-        
+
         let displayName = name;
         if (searchValue) {
             const regex = new RegExp(`(${searchValue})`, "ig");
             displayName = name.replace(regex, "<b>$1</b>");
         }
-
 
         const taskHTML = `
         <div class="task ${
@@ -56,8 +54,8 @@ function renderTasks(arr) {
 
     isFirstTime = false;
 
-    addDeleteEvents(taskArr);
-    finishTasks(taskArr);
+    addDeleteEvents();
+    finishTasks();
     addDescViewEvents();
 }
 
@@ -144,11 +142,12 @@ function searchTasks() {
     const searchArr = taskArr.filter(({ name }) => {
         return name.toLowerCase().includes(searchValue);
     });
-    
+
     renderTasks(searchArr);
 }
 
 const inputs = document.querySelectorAll("#add-task-container input");
+
 addBtn.addEventListener("click", addTask);
 inputs.forEach((input) => {
     input.addEventListener("keydown", (e) => {
