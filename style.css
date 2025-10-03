@@ -58,20 +58,24 @@ body {
 }
 
 #modal-overlay {
+    top: 0;
+    left: 0;
+    right: auto;
+    bottom: auto;
+    transform: none;
     width: 100%;
     height: 100vh;
     position: fixed;
-    z-index: 1;
-    right: 50%;
-    transform: translate(50%, 0);
+    z-index: 999;
     display: flex;
-    align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.5);
-    opacity: 0;
+    align-items: center;
+    background: rgba(0,0,0,0.5);
     pointer-events: none;
+    opacity: 0;
     transition: all 0.4s;
 }
+
 
 #modal {
     display: flex;
@@ -83,7 +87,9 @@ body {
     gap: 0.7rem;
     transform: translateY(20%);
     position: relative;
+    transition: transform 0.4s;
 }
+
 
 #modal label {
     font-size: 16px;
@@ -103,12 +109,11 @@ body {
 #close-modal-btn img {
     width: 24px;
 }
-
-.show-modal {
-    pointer-events: initial;
+#modal-overlay.show-modal {
+    pointer-events: all;
     opacity: 1;
 }
-.show-modal #modal {
+#modal-overlay.show-modal #modal {
     transform: translateY(0);
 }
 
@@ -183,8 +188,8 @@ button {
     transition: all 0.3s;
 }
 #search-input {
-    width: 100%;
-    height: 100%;
+    /* width: 100%; */
+    /* height: 100%; */
     background: none;
 }
 
@@ -287,10 +292,6 @@ button {
     width: 100%;
 }
 
-.delete-task-btn:hover {
-    transform: scale(1.15);
-}
-
 .task button::after {
     content: "";
     opacity: 0;
@@ -362,20 +363,19 @@ button {
     border-radius: 10%;
     transition: transform 0.5s;
 }
-.edit-task-btn:hover {
-    transform: scale(1.15);
-    display: flex;
-}
+
 .edit-task-btn img {
     width: clamp(20px, 6%, 30px);
     margin: auto;
 }
+
 .description {
     opacity: 0;
     font-size: 16px;
     transform: translateY(-30px);
     transition: all 0.3s;
 }
+
 .show-desc {
     height: 130px;
 }
@@ -384,6 +384,7 @@ button {
     opacity: 1;
     transform: translateY(0);
 }
+
 .show-desc .task-items-container::before {
     width: 100%;
 }

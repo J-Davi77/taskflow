@@ -1,8 +1,10 @@
+const addInputs = document.querySelectorAll("#add-task-container input");
 const list = document.querySelector("#task-container");
 const addBtn = document.querySelector("#add-task-btn");
 const searchInput = document.querySelector("#search-input");
-const overlayModal = document.querySelector("#modal-overlay");
-const modal = document.querySelector("#modal");
+const overlay = document.querySelector("#modal-overlay");
+const editBtn = document.querySelector("#edit-btn");
+const closeModalBtn = document.querySelector("#close-modal-btn");
 let taskArr = JSON.parse(localStorage.getItem("taskArr")) || [];
 let isFirstTime = true;
 
@@ -23,24 +25,26 @@ function renderTasks(arr) {
         <div class="task ${
             isFirstTime ? "animated" : ""
         }" style='animation-delay: ${index / 4}s;'>
-            <div class="task-items-container">
+        <div class="task-items-container">
                 <div class="container">
-                    <button data-info="Check" class="task-done-btn ${status}">
-                        <img src='assets/checked.png' />
+                <button data-info="Check" class="task-done-btn ${status}">
+                <img src='assets/checked.png' />
                     </button>
                     <h2 class="task-name ${status}">${displayName}</h2>
                 </div>
                 <div class="btn-container">
-                    <button class="edit-task-btn" data-info="Edit">
+                <button class="edit-task-btn" data-info="Edit">
                         <img src="assets/pencil.png" />
-                    </button>
-                    <button class="delete-task-btn" data-info="Delete" data-task="${name}">
+                        </button>
+                        <button class="delete-task-btn" data-info="Delete" data-task="${name}">
                         <img src='assets/cross.png' />
-                    </button>
-                </div>
-            </div>
-            <p class="description">${description || "No description"}</p>
-        </div>`;
+                        </button>
+                        </div>
+                        </div>
+                        <p class="description">${
+                            description || "No description"
+                        }</p>
+                        </div>`;
         list.innerHTML += taskHTML;
     });
 
@@ -59,6 +63,7 @@ function renderTasks(arr) {
     addDeleteEvents();
     finishTasks();
     addDescViewEvents();
+    addEditEvents();
 }
 
 function addTask() {
@@ -148,10 +153,24 @@ function searchTasks() {
     renderTasks(searchArr);
 }
 
-const inputs = document.querySelectorAll("#add-task-container input");
+const showModal = () => overlay.classList.add("show-modal");
+const closeModal = () => overlay.classList.remove("show-modal");
+
+function addEditEvents() {
+    const editBtns = document.querySelectorAll(".edit-task-btn");
+    console.log(editBtns);
+    editBtns.forEach((btn) => {
+        btn.addEventListener("click", showModal);
+    });
+}
+
+overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closeModal();
+});
+closeModalBtn.addEventListener('click', closeModal);
 
 addBtn.addEventListener("click", addTask);
-inputs.forEach((input) => {
+addInputs.forEach((input) => {
     input.addEventListener("keydown", (e) => {
         if (e.key === "Enter") addTask();
     });
