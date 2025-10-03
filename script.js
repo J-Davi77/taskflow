@@ -167,7 +167,7 @@ function addEditEvents() {
 overlay.addEventListener("click", (e) => {
     if (e.target === overlay) closeModal();
 });
-closeModalBtn.addEventListener('click', closeModal);
+closeModalBtn.addEventListener("click", closeModal);
 
 addBtn.addEventListener("click", addTask);
 addInputs.forEach((input) => {
