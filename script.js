@@ -1,6 +1,8 @@
 const list = document.querySelector("#task-container");
 const addBtn = document.querySelector("#add-task-btn");
 const searchInput = document.querySelector("#search-input");
+const overlayModal = document.querySelector("#modal-overlay");
+const modal = document.querySelector("#modal");
 let taskArr = JSON.parse(localStorage.getItem("taskArr")) || [];
 let isFirstTime = true;
 
