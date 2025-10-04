@@ -1,10 +1,12 @@
 const addInputs = document.querySelectorAll("#add-task-container input");
+const modalInputs = document.querySelectorAll("#modal input");
 const list = document.querySelector("#task-container");
 const addBtn = document.querySelector("#add-task-btn");
 const searchInput = document.querySelector("#search-input");
 const overlay = document.querySelector("#modal-overlay");
 const editBtn = document.querySelector("#edit-btn");
 const closeModalBtn = document.querySelector("#close-modal-btn");
+
 let taskArr = JSON.parse(localStorage.getItem("taskArr")) || [];
 let isFirstTime = true;
 
@@ -12,7 +14,7 @@ function renderTasks(arr) {
     list.innerHTML = "";
     const searchValue = searchInput.value.trim().toLowerCase();
 
-    arr.forEach(({ name, isDone, description }, index) => {
+    arr.forEach(({ id, name, isDone, description }, index) => {
         const status = isDone ? "done" : "";
 
         let displayName = name;
@@ -25,26 +27,24 @@ function renderTasks(arr) {
         <div class="task ${
             isFirstTime ? "animated" : ""
         }" style='animation-delay: ${index / 4}s;'>
-        <div class="task-items-container">
+            <div class="task-items-container">
                 <div class="container">
-                <button data-info="Check" class="task-done-btn ${status}">
-                <img src='assets/checked.png' />
+                    <button data-info="Check" class="task-done-btn ${status}" data-id="${id}">
+                        <img src='assets/checked.png' />
                     </button>
                     <h2 class="task-name ${status}">${displayName}</h2>
                 </div>
                 <div class="btn-container">
-                <button class="edit-task-btn" data-info="Edit">
+                    <button class="edit-task-btn" data-info="Edit" data-id="${id}">
                         <img src="assets/pencil.png" />
-                        </button>
-                        <button class="delete-task-btn" data-info="Delete" data-task="${name}">
+                    </button>
+                    <button class="delete-task-btn" data-info="Delete" data-id="${id}">
                         <img src='assets/cross.png' />
-                        </button>
-                        </div>
-                        </div>
-                        <p class="description">${
-                            description || "No description"
-                        }</p>
-                        </div>`;
+                    </button>
+                </div>
+            </div>
+            <p class="description">${description || "No description."}</p>
+        </div>`;
         list.innerHTML += taskHTML;
     });
 
@@ -73,6 +73,7 @@ function addTask() {
     const desc = descInput.value.trim();
 
     const task = {
+        id: Date.now(),
         name: name,
         isDone: false,
         description: desc,
@@ -80,8 +81,6 @@ function addTask() {
 
     if (task.name.length === 0) {
         alert("Please enter a task name.");
-    } else if (taskArr.findIndex(({ name }) => name === task.name) !== -1) {
-        alert("This task already exists.");
     } else {
         taskArr.push(task);
         localStorage.setItem("taskArr", JSON.stringify(taskArr));
@@ -96,8 +95,8 @@ function addDeleteEvents() {
     const deleteBtns = document.querySelectorAll(".delete-task-btn");
     deleteBtns.forEach((btn) => {
         btn.addEventListener("click", (e) => {
-            const task = e.currentTarget.dataset.task;
-            taskArr = taskArr.filter(({ name }) => name !== task);
+            const taskId = parseInt(e.currentTarget.dataset.id);
+            taskArr = taskArr.filter(({ id }) => id !== taskId);
             localStorage.setItem("taskArr", JSON.stringify(taskArr));
 
             if (searchInput.value.trim()) {
@@ -113,22 +112,15 @@ function finishTasks() {
     const finishBtns = document.querySelectorAll(".task-done-btn");
     finishBtns.forEach((btn) => {
         btn.addEventListener("click", (e) => {
-            const button = e.currentTarget;
-            const taskName =
-                button.parentElement.querySelector(".task-name").textContent;
-
-            button.classList.toggle("done");
-            button.parentElement
-                .querySelector(".task-name")
-                .classList.toggle("done");
+            const taskId = parseInt(e.currentTarget.dataset.id);
 
             taskArr = taskArr.map((task) =>
-                task.name === taskName
-                    ? { ...task, isDone: !task.isDone }
-                    : task
+                task.id === taskId ? { ...task, isDone: !task.isDone } : task
             );
 
             localStorage.setItem("taskArr", JSON.stringify(taskArr));
+            btn.classList.toggle("done");
+            btn.nextElementSibling.classList.toggle("done");
         });
     });
 }
@@ -137,7 +129,7 @@ function addDescViewEvents() {
     const tasks = document.querySelectorAll(".task");
 
     tasks.forEach((task) => {
-        task.addEventListener("dblclick", (e) => {
+        task.addEventListener("click", (e) => {
             if (e.target.closest("button")) return;
             task.classList.toggle("show-desc");
         });
@@ -150,24 +142,57 @@ function searchTasks() {
         return name.toLowerCase().includes(searchValue);
     });
 
-    renderTasks(searchArr);
+    searchArr.length > 0
+        ? renderTasks(searchArr)
+        : (list.innerHTML = "No tasks found.");
 }
 
-const showModal = () => overlay.classList.add("show-modal");
+const showModal = () => {
+    overlay.classList.add("show-modal");
+};
+
 const closeModal = () => overlay.classList.remove("show-modal");
 
+let editingTaskId = null;
 function addEditEvents() {
     const editBtns = document.querySelectorAll(".edit-task-btn");
-    console.log(editBtns);
     editBtns.forEach((btn) => {
-        btn.addEventListener("click", showModal);
+        btn.addEventListener("click", (e) => {
+            editingTaskId = parseInt(e.currentTarget.dataset.id);
+            const task = taskArr.find((task) => task.id === editingTaskId);
+            const editNameInput = document.querySelector("#edit-task-name");
+            const editDescInput = document.querySelector("#edit-task-desc");
+            editNameInput.value = editNameInput.value || task.name;
+            editDescInput.value = editDescInput.value || task.description;
+
+            showModal();
+        });
     });
 }
+function editTask() {
+    const editNameInput = document.querySelector("#edit-task-name");
+    const editDescInput = document.querySelector("#edit-task-desc");
+    if (editNameInput.value) {
+        const task = taskArr.find((task) => task.id === editingTaskId);
+        task.name = editNameInput.value;
+        task.description = editDescInput.value;
+        localStorage.setItem("taskArr", JSON.stringify(taskArr));
+        renderTasks(taskArr);
+        closeModal();
+    } else alert("Task name can't be empty.");
+}
+
+editBtn.addEventListener("click", editTask);
 
 overlay.addEventListener("click", (e) => {
     if (e.target === overlay) closeModal();
 });
+
 closeModalBtn.addEventListener("click", closeModal);
+
+modalInputs.forEach((inp) =>
+    inp.addEventListener("keydown", (e) => e.key === "Enter" && editTask())
+);
 
 addBtn.addEventListener("click", addTask);
 addInputs.forEach((input) => {

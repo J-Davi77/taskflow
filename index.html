@@ -24,19 +24,21 @@
         <div id="modal-overlay">
             <div id="modal">
                 <h1 class="title">Edit Task</h1>
-                <label for="input-name">Task name:</label>
+                <label for="edit-task-name">Task name:</label>
                 <input
                     type="text"
-                    id="input-name"
+                    id="edit-task-name"
                     autocomplete="off"
                     placeholder="New task name"
+               
                 />
-                <label for="input-desc">Task description:</label>
+                <label for="edit-task-desc">Task description:</label>
                 <input
                     type="text"
-                    id="input-desc"
+                    id="edit-task-desc"
                     autocomplete="off"
                     placeholder="New task description"
+                    maxlength="500"
                 />
                 <button id="close-modal-btn">
                     <img src="assets/cross.png" alt="Close modal button" />
