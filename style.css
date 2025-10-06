@@ -393,3 +393,7 @@ button {
 .show-desc .task-items-container::before {
     width: 100%;
 }
+
+.bold {
+    text-decoration: underline;
+}

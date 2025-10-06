@@ -20,7 +20,7 @@ function renderTasks(arr) {
         let displayName = name;
         if (searchValue) {
             const regex = new RegExp(`(${searchValue})`, "ig");
-            displayName = name.replace(regex, "<b>$1</b>");
+            displayName = name.replace(regex, `<b class="bold">$1</b>`);
         }
 
         const taskHTML = `
@@ -162,8 +162,8 @@ function addEditEvents() {
             const task = taskArr.find((task) => task.id === editingTaskId);
             const editNameInput = document.querySelector("#edit-task-name");
             const editDescInput = document.querySelector("#edit-task-desc");
-            editNameInput.value = editNameInput.value || task.name;
-            editDescInput.value = editDescInput.value || task.description;
+            editNameInput.value = task.name;
+            editDescInput.value = task.description;
 
             showModal();
         });
@@ -172,7 +172,7 @@ function addEditEvents() {
 function editTask() {
     const editNameInput = document.querySelector("#edit-task-name");
     const editDescInput = document.querySelector("#edit-task-desc");
-    if (editNameInput.value) {
+    if (editNameInput.value.trim()) {
         const task = taskArr.find((task) => task.id === editingTaskId);
         task.name = editNameInput.value;
         task.description = editDescInput.value;
