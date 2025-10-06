@@ -20,6 +20,7 @@
     padding: 0;
     box-sizing: border-box;
     user-select: none;
+    letter-spacing: 0.5px;
 }
 
 body {
@@ -210,6 +211,7 @@ button {
     min-height: 500px;
     padding: 1rem 0;
     width: clamp(200px, 80%, 750px);
+    transition: 0.2s;
 }
 
 .task {
@@ -225,6 +227,7 @@ button {
     box-shadow: 1px 1px 4px 1px var(--shadow-task);
     cursor: pointer;
     transition: all 0.4s;
+    position: relative;
 }
 
 .task:hover {
@@ -238,21 +241,15 @@ button {
     animation: fadeIn 0.3s forwards;
 }
 
-.task-items-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 0 1rem;
-    position: relative;
-}
 
-.task-items-container::before {
+.task::before {
     content: "";
     width: 0;
     height: 1px;
     position: absolute;
-    top: 90%;
-    left: 0;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background: white;
     transition: all 0.3s;
 }
@@ -262,17 +259,21 @@ button {
     align-items: center;
     gap: 1rem;
     width: 80%;
+    position: absolute;
+    left: 5%;
 }
 
 .btn-container {
     display: flex;
     align-items: center;
+    position: absolute;
+    right: 0;
     gap: 1rem;
 }
 
 .task-name {
     overflow: hidden;
-    font-size: 16px;
+    font-size: clamp(12px, 4vw, 16px);
     color: var(--color-text);
     font-weight: 500;
 }
@@ -376,13 +377,15 @@ button {
 
 .description {
     opacity: 0;
-    font-size: 16px;
+    font-size: 14px;
     transform: translateY(-30px);
+    position: absolute;
+    top: 60%;
     transition: all 0.3s;
 }
 
 .show-desc {
-    height: 130px;
+    height: 140px;
 }
 
 .show-desc p {
@@ -390,8 +393,8 @@ button {
     transform: translateY(0);
 }
 
-.show-desc .task-items-container::before {
-    width: 100%;
+.show-desc.task::before {
+    width: 90%;
 }
 
 .bold {

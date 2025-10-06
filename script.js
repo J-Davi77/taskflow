@@ -27,7 +27,6 @@ function renderTasks(arr) {
         <div class="task ${
             isFirstTime ? "animated" : ""
         }" style='animation-delay: ${index / 4}s;'>
-            <div class="task-items-container">
                 <div class="container">
                     <button data-info="Check" class="task-done-btn ${status}" data-id="${id}">
                         <img src='assets/checked.png' />
@@ -41,7 +40,6 @@ function renderTasks(arr) {
                     <button class="delete-task-btn" data-info="Delete" data-id="${id}">
                         <img src='assets/cross.png' />
                     </button>
-                </div>
             </div>
             <p class="description">${description || "No description."}</p>
         </div>`;
