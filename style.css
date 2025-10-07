@@ -81,6 +81,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: clamp(150px, 60vw, 450px);
     background: var(--bg-container);
     border-radius: 10px;
     padding: 1.8rem;
@@ -132,6 +133,7 @@ body {
     flex-direction: column;
     background: var(--bg-container);
     padding: 1rem;
+    width: clamp(110px, 80vw, 500px);
     border-radius: 7px;
     gap: 1rem;
     transition: all 0.3s;
@@ -143,8 +145,8 @@ body {
 }
 
 input {
-    width: clamp(110px, 40vw, 400px);
-    height: 7vh;
+    width: 90%;
+    height: clamp(20px, 10vh, 50px);
     padding: 1rem;
     font-size: clamp(12px, 3vw, 18px);
     border-radius: 5px;
@@ -156,11 +158,12 @@ input {
 }
 
 input:focus {
-    box-shadow: 0px 0px 3px 2px rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.4);
 }
 
 input::placeholder {
     color: var(--color-placeholder);
+    font-size: 16px;
 }
 
 button {
@@ -186,7 +189,7 @@ button {
 }
 
 #search-container {
-    width: clamp(110px, 40vw, 400px);
+    width: clamp(110px, 60vw, 400px);
     display: flex;
     align-items: center;
     border-radius: 50px;
