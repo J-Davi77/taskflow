@@ -1,10 +1,10 @@
 :root {
     --bg-main: rgb(200, 200, 255);
     --bg-container: rgb(255, 255, 255);
-    --bg-task: rgb(250, 255, 255);
+    --bg-task: rgb(240, 255, 255);
     --color-text: rgb(10, 20, 60);
     --color-text-muted: rgb(100, 120, 160);
-    --color-btn: rgb(100, 140,255);
+    --color-btn: rgb(100, 140, 255);
     --color-btn-hover: rgb(100, 150, 255);
     --color-input-bg: rgb(230, 240, 240);
     --color-placeholder: rgb(120, 131, 150);
@@ -46,15 +46,24 @@ body {
     gap: 1rem;
     font-family: Montserrat, Arial, Helvetica, sans-serif;
     font-weight: 500;
-    font-size: clamp(24px, 5vw, 48px);
+    font-size: clamp(24px, 5vw, 48px);  
     margin-top: 5vh;
     opacity: 0;
     transform: translateY(50%);
     animation: fadeIn forwards 1s;
 }
 
+#sidebar {
+    position: fixed;
+    left: 0;
+    height: 100%;
+    width: clamp(50px, 20%, 250px);
+    background: var(--bg-container);
+}
+
 .title {
     font-size: clamp(20px, 5vw, 48px);
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
     text-align: center;
 }
 
@@ -122,6 +131,7 @@ body {
     pointer-events: all;
     opacity: 1;
 }
+
 #modal-overlay.show-modal #modal {
     transform: translateY(0);
 }
