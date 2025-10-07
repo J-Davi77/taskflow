@@ -1,16 +1,16 @@
 :root {
-    --bg-main: rgb(40, 0, 40);
-    --bg-container: rgb(15, 15, 100);
-    --bg-task: rgb(0, 0, 30);
-    --color-text: white;
-    --color-text-muted: gray;
-    --color-btn: rgb(0, 0, 190);
-    --color-btn-hover: rgb(0, 0, 200);
-    --color-input-bg: rgb(0, 0, 40);
-    --color-placeholder: rgb(190, 190, 190);
-    --tooltip-bg: rgb(39, 0, 138);
-    --shadow-task: rgba(0, 0, 0, 0.4);
-    --shadow-btn: rgba(0, 0, 0, 0.4);
+    --bg-main: rgb(230, 240, 255);
+    --bg-container: rgb(255, 255, 255);
+    --bg-task: rgb(240, 250, 255);
+    --color-text: rgb(10, 20, 60);
+    --color-text-muted: rgb(100, 120, 160);
+    --color-btn: rgb(80, 130, 255);
+    --color-btn-hover: rgb(100, 150, 255);
+    --color-input-bg: rgb(230, 240, 255);
+    --color-placeholder: rgb(150, 160, 190);
+    --tooltip-bg: rgb(70, 100, 230);
+    --shadow-task: rgba(0, 0, 0, 0.1);
+    --shadow-btn: rgba(0, 0, 0, 0.1);
 }
 
 *,
@@ -44,7 +44,7 @@ body {
     display: flex;
     align-items: center;
     gap: 1rem;
-    font-family: Montserrat;
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
     font-weight: 500;
     font-size: clamp(24px, 5vw, 48px);
     margin-top: 5vh;
@@ -94,11 +94,12 @@ body {
     font-size: 16px;
     align-self: flex-start;
 }
+
 #close-modal-btn {
     background: none;
-    width: clamp(24px, 5vw, 30px);
+    width: clamp(24px, 5vw, 35px);
     border-radius: 50%;
-    padding: 6px;
+    padding: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -108,11 +109,12 @@ body {
 }
 
 #close-modal-btn:hover {
-    background: rgba(255, 255, 255, 0.126);
+    background: rgba(68, 68, 68, 0.126);
 }
 
 #close-modal-btn img {
     width: 100%;
+    filter: invert(1);
 }
 
 #modal-overlay.show-modal {
@@ -133,11 +135,11 @@ body {
     border-radius: 7px;
     gap: 1rem;
     transition: all 0.3s;
+    box-shadow: 2px 2px 5px 2px var(--shadow-btn);
 }
 
 #add-task-container:hover {
     transform: translateY(-5%);
-    box-shadow: 2px 2px 5px 2px var(--shadow-btn);
 }
 
 input {
@@ -241,7 +243,6 @@ button {
     animation: fadeIn 0.3s forwards;
 }
 
-
 .task::before {
     content: "";
     width: 0;
@@ -250,7 +251,7 @@ button {
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: white;
+    background: var(--color-text);
     transition: all 0.3s;
 }
 
@@ -343,13 +344,14 @@ button {
 
 .task-done-btn {
     display: flex;
-    background: white;
+    background: rgb(26, 26, 26);
 }
 
 .task-done-btn img {
     width: 100%;
     margin: auto;
     border-radius: 50%;
+    filter: invert(0.7);
     transform: scale(0);
     transition: all 0.3s;
 }
@@ -358,7 +360,9 @@ button {
     transform: scale(1) rotate(360deg);
     box-shadow: 0px 0px 5px var(--color-text);
 }
-
+.task button img {
+    filter: invert(1);
+}
 .task-name.done {
     text-decoration: line-through;
     color: var(--color-text-muted);
