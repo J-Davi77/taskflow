@@ -1,14 +1,14 @@
 :root {
-    --bg-main: rgb(230, 240, 255);
+    --bg-main: rgb(200, 200, 255);
     --bg-container: rgb(255, 255, 255);
-    --bg-task: rgb(240, 250, 255);
+    --bg-task: rgb(250, 255, 255);
     --color-text: rgb(10, 20, 60);
     --color-text-muted: rgb(100, 120, 160);
-    --color-btn: rgb(80, 130, 255);
+    --color-btn: rgb(100, 140,255);
     --color-btn-hover: rgb(100, 150, 255);
-    --color-input-bg: rgb(230, 240, 255);
-    --color-placeholder: rgb(150, 160, 190);
-    --tooltip-bg: rgb(70, 100, 230);
+    --color-input-bg: rgb(230, 240, 240);
+    --color-placeholder: rgb(120, 131, 150);
+    --tooltip-bg: rgb(60, 100, 230);
     --shadow-task: rgba(0, 0, 0, 0.1);
     --shadow-btn: rgba(0, 0, 0, 0.1);
 }
@@ -139,7 +139,7 @@ body {
 }
 
 #add-task-container:hover {
-    transform: translateY(-5%);
+    transform: translateY(-1rem);
 }
 
 input {
