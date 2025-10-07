@@ -13,7 +13,7 @@ let isFirstTime = true;
 function renderTasks(arr) {
     list.innerHTML = "";
     const searchValue = searchInput.value.trim().toLowerCase();
-
+    let html = '';
     arr.forEach(({ id, name, isDone, description }, index) => {
         const status = isDone ? "done" : "";
 
@@ -43,7 +43,7 @@ function renderTasks(arr) {
             </div>
             <p class="description">${description || "No description."}</p>
         </div>`;
-        list.innerHTML += taskHTML;
+        html += taskHTML;
     });
 
     if (isFirstTime) {
@@ -55,7 +55,7 @@ function renderTasks(arr) {
             );
         });
     }
-
+    list.innerHTML = html;
     isFirstTime = false;
 
     addDeleteEvents();
