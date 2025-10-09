@@ -21,37 +21,51 @@
     <body>
         <header>
             <button id="menu-btn" data-info="Menu">
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
             </button>
+
             <h1 id="page-title">TaskFlow</h1>
         </header>
-
-        <!--<nav id="sidebar">
-            <ul class="config">
-                <li class="darmode-switch"></li>
-            </ul>
-        </nav> -->
-
+        
+        <div id="sidebar-overlay">
+            <nav id="sidebar">
+                <ul class="config">
+                    <li class="darkmode-switch"></li>
+                </ul>
+            </nav>
+        </div>
         <div id="modal-overlay">
             <div id="modal">
                 <h1 class="title">Edit Task</h1>
+
                 <label for="edit-task-name">Task name:</label>
-                <input
-                    type="text"
-                    id="edit-task-name"
-                    autocomplete="off"
-                    placeholder="New task name"
-                />
+                <div class="input-container">
+                    <input
+                        type="text"
+                        id="edit-task-name"
+                        autocomplete="off"
+                        placeholder="New task name"
+                    />
+                    <button class="clear-input-btn">
+                        <img src="assets/cross.png" alt="" />
+                    </button>
+                </div>
+
                 <label for="edit-task-desc">Task description:</label>
-                <input
-                    type="text"
-                    id="edit-task-desc"
-                    autocomplete="off"
-                    placeholder="New task description"
-                    maxlength="500"
-                />
+                <div class="input-container">
+                    <input
+                        type="text"
+                        id="edit-task-desc"
+                        autocomplete="off"
+                        placeholder="New task description"
+                        maxlength="500"
+                    />
+                    <button class="clear-input-btn">
+                        <img src="assets/cross.png" alt="" />
+                    </button>
+                </div>
                 <button id="close-modal-btn">
                     <img src="assets/cross.png" alt="Close modal button" />
                 </button>
@@ -61,28 +75,44 @@
 
         <div id="add-task-container">
             <h1 class="title">Add new task</h1>
-            <input
-                id="task-name-input"
-                maxlength="200"
-                placeholder="Task name"
-                autocomplete="off"
-            />
-            <input
-                id="task-desc-input"
-                maxlength="500"
-                placeholder="Task description(optional)"
-                autocomplete="off"
-            />
+
+            <div class="input-container">
+                <input
+                    id="task-name-input"
+                    maxlength="200"
+                    placeholder="Task name"
+                    autocomplete="off"
+                />
+                <button class="clear-input-btn">
+                    <img src="assets/cross.png" alt="" />
+                </button>
+            </div>
+
+            <div class="input-container">
+                <input
+                    id="task-desc-input"
+                    maxlength="500"
+                    placeholder="Task description(optional)"
+                    autocomplete="off"
+                />
+                <button class="clear-input-btn">
+                    <img src="assets/cross.png" alt="" />
+                </button>
+            </div>
+
             <button id="add-task-btn" class="form-btn">Add</button>
         </div>
 
-        <div id="search-container">
+        <div class="input-container" id="search-container">
             <input
                 type="text"
                 id="search-input"
                 autocomplete="off"
                 placeholder="Search tasks"
             />
+            <button class="clear-input-btn">
+                <img src="assets/cross.png" alt="clear-input" />
+            </button>
         </div>
 
         <div id="task-container"></div>
