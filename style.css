@@ -8,7 +8,7 @@
     --color-btn-hover: rgb(100, 150, 255);
     --color-input-bg: rgb(230, 240, 240);
     --color-placeholder: rgb(120, 131, 150);
-    --tooltip-bg: rgb(210, 210, 225);
+    --tooltip-bg: rgb(145, 145, 255);
     --shadow-task: rgba(0, 0, 0, 0.1);
     --shadow-btn: rgba(0, 0, 0, 0.1);
 }
@@ -40,17 +40,36 @@ body {
     }
 }
 
-#title {
+header {
+    padding: 0.5rem 1.3rem;
+    height: 80px;
     display: flex;
+    gap: 1.2rem;
     align-items: center;
-    gap: 1rem;
+    width: 100%;
+    background: var(--bg-container);
+    box-shadow: 2px 2px 5px var(--shadow-btn); 
+}
+
+#menu-btn {
+    background: none;
+    width: clamp(30px, 15vw, 35px);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.line {
+    height: 5px;
+    width: clamp(25px, 100%, 35px);
+    border-radius: 5px;
+    background: black;
+}
+
+#page-title {
     font-family: Montserrat, Arial, Helvetica, sans-serif;
     font-weight: 500;
-    font-size: clamp(24px, 6vw, 58px);  
-    margin-top: 5vh;
-    opacity: 0;
-    transform: translateY(50%);
-    animation: fadeIn forwards 1s;
+    font-size: clamp(24px, 8vw, 36px);  
 }
 
 #sidebar {
@@ -107,19 +126,19 @@ body {
 
 #close-modal-btn {
     background: none;
-    width: clamp(24px, 5vw, 35px);
+    width: clamp(28px, 10vw, 35px);
     border-radius: 50%;
     padding: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 5%;
-    right: 5%;
+    top: 3%;
+    right: 3%;
 }
 
 #close-modal-btn:hover {
-    background: rgba(68, 68, 68, 0.126);
+    background: rgba(68, 68, 68, 0.125);
 }
 
 #close-modal-btn img {
@@ -178,6 +197,7 @@ input::placeholder {
 
 button {
     cursor: pointer;
+    position: relative;
     border: none;
     transition: all 0.3s;
 }
@@ -199,7 +219,7 @@ button {
 }
 
 #search-container {
-    width: clamp(110px, 60vw, 400px);
+    width: clamp(110px, 80vw, 400px);
     display: flex;
     align-items: center;
     border-radius: 50px;
@@ -295,7 +315,6 @@ button {
     width: clamp(20px, 10%, 30px);
     aspect-ratio: 1 / 1;
     border-radius: 50%;
-    position: relative;
 }
 
 .task .delete-task-btn {
@@ -311,7 +330,7 @@ button {
     width: 100%;
 }
 
-.task button::after {
+button[data-info]::after {
     content: "";
     opacity: 0;
     border: 10px solid transparent;
@@ -325,7 +344,7 @@ button {
     white-space: nowrap;
 }
 
-.task button::before {
+button[data-info]::before {
     content: attr(data-info);
     opacity: 0;
     background: var(--tooltip-bg);
@@ -344,12 +363,12 @@ button {
     white-space: nowrap;
 }
 
-.task button:hover::before {
+button[data-info]:hover::before {
     opacity: 1;
     top: 50px;
 }
 
-.task button:hover::after {
+button[data-info]:hover::after {
     opacity: 1;
     top: 30px;
 }

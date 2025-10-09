@@ -16,7 +16,7 @@ function createTaskHTML({ id, name, isDone, description }, index = 0) {
   const status = isDone ? "done" : "";
 
   const taskHTML = `
-    <div class="task" data-id="${id}" style="animation-delay: ${index / 4}s;">
+    <div class="task" data-id="${id}" style="animation-delay: ${index / 5}s;">
       <div class="container">
         <button data-info="Check" class="task-done-btn ${status}" data-id="${id}">
           <img src='assets/checked.png' />
