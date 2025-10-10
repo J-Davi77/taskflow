@@ -8,11 +8,38 @@
     --color-btn-hover: rgb(100, 150, 255);
     --color-input-bg: rgb(230, 240, 240);
     --color-placeholder: rgb(120, 131, 150);
-    --tooltip-bg: rgb(35, 35, 35);
+    --tooltip-bg: rgb(40, 40, 40);
     --shadow-task: rgba(0, 0, 0, 0.1);
     --shadow-btn: rgba(0, 0, 0, 0.1);
     --bg-header: rgba(255, 255, 255, 0.6);
     --tooltip-text-color: white;
+}
+
+body.darkmode {
+    /* Backgrounds */
+    --bg-main: rgb(25, 25, 35);
+    --bg-container: rgb(35, 38, 46);
+    --bg-task: rgb(45, 50, 60);
+    --bg-header: rgba(50, 55, 65, 0.8);
+
+    /* Textos */
+    --color-text: rgb(220, 220, 230);
+    --color-text-muted: rgb(150, 160, 180);
+
+    /* Botões */
+    --color-btn: rgb(80, 120, 220);
+    --color-btn-hover: rgb(109, 37, 255);
+
+    /* Inputs */
+    --color-input-bg: rgb(50, 55, 65);
+    --color-placeholder: rgb(120, 130, 150);
+
+    /* Tooltips */
+    --tooltip-bg: rgb(20, 20, 20);
+    --tooltip-text-color: rgb(230, 230, 230);
+
+    --shadow-task: rgba(0, 0, 0, 0.4);
+    --shadow-btn: rgba(0, 0, 0, 0.3);
 }
 
 *,
@@ -46,10 +73,10 @@ header {
     padding: 0.5rem 1.3rem;
     height: 80px;
     display: flex;
-    gap: 2rem;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
-    background: rgba(255, 255, 255, 0.6);
+    background: var(--bg-header);
     backdrop-filter: blur(6px);
     box-shadow: 2px 2px 5px var(--shadow-btn);
     position: sticky;
@@ -62,11 +89,11 @@ header {
     width: clamp(30px, 15vw, 35px);
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.4rem;
 }
 
 .line {
-    height: 5px;
+    height: 4px;
     width: clamp(25px, 100%, 35px);
     border-radius: 5px;
     background: var(--color-text);
@@ -75,9 +102,13 @@ header {
 #page-title {
     font-family: Montserrat, Arial, Helvetica, sans-serif;
     font-weight: 500;
-    font-size: clamp(24px, 8vw, 36px);  
+    font-size: clamp(24px, 8vw, 36px);
 }
-
+.menu-btn-container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
 #sidebar-overlay {
     position: fixed;
     height: 100%;
@@ -87,7 +118,7 @@ header {
     backdrop-filter: blur(4px);
     opacity: 0;
     pointer-events: none;
-    transition: all 0.1s ease-out;
+    transition: all 0.15s ease-out;
 }
 
 #sidebar-overlay.show-sidebar {
@@ -100,10 +131,10 @@ header {
     left: 0;
     height: 100%;
     box-shadow: 5px 5px 6px var(--shadow-task);
-    width: clamp(50px, 20%, 250px);
+    width: clamp(50px, 100%, 250px);
     background: var(--bg-container);
     transform: translateX(-100%);
-    transition: all 0.15s ease-out;
+    transition: all 0.2s ease-out;
 }
 
 #sidebar-overlay.show-sidebar #sidebar {
@@ -165,15 +196,17 @@ header {
     position: absolute;
     top: 3%;
     right: 3%;
+    filter: invert(1);
 }
 
 #close-modal-btn:hover {
     background: rgba(68, 68, 68, 0.125);
 }
-
+.darkmode #close-modal-btn {
+    filter: invert(0);
+}
 #close-modal-btn img {
     width: 100%;
-    filter: invert(1);
 }
 
 #modal-overlay.show-modal {
@@ -240,7 +273,7 @@ button {
     color: var(--color-text);
     font-weight: 600;
     font-size: 16px;
-    transition: all 0.6s;
+    transition: all 0.3s;
 }
 
 .form-btn:hover {
@@ -272,6 +305,10 @@ button {
     background: none;
     padding: 0.5rem;
     width: 32px;
+}
+
+.clear-input-btn:hover {
+    filter: invert(0);
 }
 
 .clear-input-btn img {
@@ -317,7 +354,6 @@ button {
     transform: translateY(-7px) scale(1.01);
     box-shadow: 4px 4px 10px var(--shadow-task);
 }
-
 
 .task::before {
     content: "";
@@ -374,8 +410,6 @@ button {
     width: 100%;
 }
 
-
-
 button[data-info]::before {
     content: attr(data-info);
     opacity: 0;
@@ -388,6 +422,7 @@ button[data-info]::before {
     font-size: clamp(12px, 3vw, 14px);
     position: absolute;
     transform: translate(-50%, -50%);
+    box-shadow: 0 0 3px 2px var(--shadow-btn);
     top: 30px;
     left: 50%;
     transition: all 0.2s ease-out;
@@ -406,9 +441,8 @@ button[data-info]:hover::before {
 }
 
 .task .task-done-btn img {
-    filter: invert(0.9);
-    width: 101%;
-    height: 101%;
+    width: 100%;
+    height: 100%;
     margin: auto;
     border-radius: 50%;
     transform: scale(0);
@@ -421,6 +455,9 @@ button[data-info]:hover::before {
 }
 .task button img {
     filter: invert(1);
+}
+.darkmode button img {
+    filter: invert(0);
 }
 .task-name.done {
     text-decoration: line-through;

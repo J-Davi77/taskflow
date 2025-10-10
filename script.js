@@ -30,7 +30,7 @@ function createTaskHTML({ id, name, isDone, description }, index = 0) {
     <div class="task" data-id="${id}" style="animation-delay: ${index / 5}s;">
     <div class="container">
         <button data-info="Check" class="task-done-btn ${status}" data-id="${id}">
-          <img src='assets/checked.png' />
+          <img src='assets/checked.svg' />
           </button>
         <h2 class="task-name ${status}">${name}</h2>
       </div>
