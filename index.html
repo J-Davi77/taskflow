@@ -18,7 +18,7 @@
         />
         <script defer src="script.js"></script>
     </head>
-    <body class="darkmode">
+    <body>
         <header>
             <div class="menu-btn-container">
                 <button id="menu-btn" data-info="Menu">
@@ -30,15 +30,26 @@
                 <h1 id="page-title">TaskFlow</h1>
             </div>
 
-            <button class="darkmode-btn">
-                <div class="darkmode-switch">
-                    <img src="assets/moon.svg" alt="Moon icon" />
-                </button>
-            </div>
+            <nav>
+                <a href="#">Link</a>
+                <a href="#">Link</a>
+                <a href="#">Link</a>
+                <a href="#">Link</a>
+                <a href="#">Link</a>
+            </nav>
+            <button class="darkmode-btn" data-info="Darkmode">
+                    <img src="assets/moon.svg" alt="Darkmode icon" class="theme-icon moon"/>
+                    <img src="assets/sun.svg" alt="Lightmode icon" class="theme-icon sun"/>
+            </button>
+
         </header>
 
         <div id="sidebar-overlay">
-            <nav id="sidebar"></nav>
+            <nav id="sidebar">
+                <button class="close-sidebar-btn">
+                    <img src="assets/cross.png" alt="Close sidebar image">
+                </button>
+            </nav>
         </div>
         <div id="modal-overlay">
             <div id="modal">

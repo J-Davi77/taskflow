@@ -9,6 +9,22 @@ const closeModalBtn = document.querySelector("#close-modal-btn");
 const clearInputBtns = document.querySelectorAll(".clear-input-btn");
 const menuBtn = document.querySelector("#menu-btn");
 const sidebarOverlay = document.querySelector("#sidebar-overlay");
+const darkmodeBtn = document.querySelector('.darkmode-btn');
+const closeSidebarBtn = document.querySelector('.close-sidebar-btn');
+const isDarkmode = localStorage.getItem('darkmode');
+if (isDarkmode) toggleDarkmode();
+
+
+function toggleDarkmode() {
+    document.body.classList.toggle('darkmode');
+    const isDark = document.body.classList.contains('darkmode');
+    
+    if (isDark) darkmodeBtn.setAttribute('data-info', 'Lightmode')
+        else darkmodeBtn.setAttribute('data-info', 'Darkmode')
+    
+    localStorage.setItem('darkmode', isDark);
+}
+
 
 function closeSidebar() {
     sidebarOverlay.classList.remove("show-sidebar");
@@ -27,24 +43,24 @@ function createTaskHTML({ id, name, isDone, description }, index = 0) {
     const status = isDone ? "done" : "";
 
     const taskHTML = `
-    <div class="task" data-id="${id}" style="animation-delay: ${index / 5}s;">
+    <div class="task" data-id="${id}" style="animation-delay: ${index / 8}s;">
     <div class="container">
-        <button data-info="Check" class="task-done-btn ${status}" data-id="${id}">
-          <img src='assets/checked.svg' />
-          </button>
-        <h2 class="task-name ${status}">${name}</h2>
-      </div>
-      <div class="btn-container">
-        <button class="edit-task-btn" data-info="Edit" data-id="${id}">
+    <button data-info="Check" class="task-done-btn ${status}" data-id="${id}">
+    <img src='assets/checked.svg' />
+    </button>
+    <h2 class="task-name ${status}">${name}</h2>
+    </div>
+    <div class="btn-container">
+    <button class="edit-task-btn" data-info="Edit" data-id="${id}">
           <img src="assets/pencil.png" />
           </button>
           <button class="delete-task-btn" data-info="Delete" data-id="${id}">
           <img src='assets/cross.png' />
-        </button>
+          </button>
       </div>
       <p class="description">${description || "No description."}</p>
-    </div>`;
-
+      </div>`;
+      
     list.insertAdjacentHTML("beforeend", taskHTML);
 }
 
@@ -55,14 +71,14 @@ function addTask() {
     const desc = descInput.value.trim();
 
     if (!name) return alert("Please enter a task name.");
-
+    
     const newTask = {
         id: Date.now(),
         name,
         isDone: false,
         description: desc,
     };
-
+    
     taskArr.push(newTask);
     localStorage.setItem("taskArr", JSON.stringify(taskArr));
     createTaskHTML(newTask);
@@ -116,11 +132,11 @@ function editTask() {
     task.name = newName;
     task.description = descInput.value;
     saveTasks();
-
+    
     const li = list.querySelector(`[data-id="${editingTaskId}"]`);
     li.querySelector(".task-name").textContent = newName;
     li.querySelector(".description").textContent =
-        descInput.value || "No description.";
+    descInput.value || "No description.";
 
     closeModal();
 }
@@ -174,3 +190,5 @@ clearInputBtns.forEach((btn) =>
         searchTasks();
     })
 );
+closeSidebarBtn.addEventListener('click', closeSidebar);
+darkmodeBtn.addEventListener('click', toggleDarkmode);
