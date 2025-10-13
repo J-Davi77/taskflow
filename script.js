@@ -9,22 +9,29 @@ const closeModalBtn = document.querySelector("#close-modal-btn");
 const clearInputBtns = document.querySelectorAll(".clear-input-btn");
 const menuBtn = document.querySelector("#menu-btn");
 const sidebarOverlay = document.querySelector("#sidebar-overlay");
-const darkmodeBtn = document.querySelector('.darkmode-btn');
-const closeSidebarBtn = document.querySelector('.close-sidebar-btn');
-const isDarkmode = localStorage.getItem('darkmode');
+const darkmodeBtn = document.querySelector(".darkmode-btn");
+const closeSidebarBtn = document.querySelector(".close-sidebar-btn");
+const isDarkmode = localStorage.getItem("darkmode");
 if (isDarkmode) toggleDarkmode();
 
-
 function toggleDarkmode() {
-    document.body.classList.toggle('darkmode');
-    const isDark = document.body.classList.contains('darkmode');
-    
-    if (isDark) darkmodeBtn.setAttribute('data-info', 'Lightmode')
-        else darkmodeBtn.setAttribute('data-info', 'Darkmode')
-    
-    localStorage.setItem('darkmode', isDark);
-}
+    document
+        .querySelectorAll("*")
+        .forEach((el) => el.classList.add("disable-transitions")),
+        document.body.classList.toggle("darkmode");
+    const isDark = document.body.classList.contains("darkmode");
 
+    if (isDark) darkmodeBtn.setAttribute("data-info", "Lightmode");
+    else darkmodeBtn.setAttribute("data-info", "Darkmode");
+
+    setTimeout(() =>
+        document
+            .querySelectorAll("*")
+            .forEach((el) => el.classList.remove("disable-transitions"), 300)
+    );
+
+    localStorage.setItem("darkmode", isDark);
+}
 
 function closeSidebar() {
     sidebarOverlay.classList.remove("show-sidebar");
@@ -60,7 +67,7 @@ function createTaskHTML({ id, name, isDone, description }, index = 0) {
       </div>
       <p class="description">${description || "No description."}</p>
       </div>`;
-      
+
     list.insertAdjacentHTML("beforeend", taskHTML);
 }
 
@@ -71,14 +78,14 @@ function addTask() {
     const desc = descInput.value.trim();
 
     if (!name) return alert("Please enter a task name.");
-    
+
     const newTask = {
         id: Date.now(),
         name,
         isDone: false,
         description: desc,
     };
-    
+
     taskArr.push(newTask);
     localStorage.setItem("taskArr", JSON.stringify(taskArr));
     createTaskHTML(newTask);
@@ -132,11 +139,11 @@ function editTask() {
     task.name = newName;
     task.description = descInput.value;
     saveTasks();
-    
+
     const li = list.querySelector(`[data-id="${editingTaskId}"]`);
     li.querySelector(".task-name").textContent = newName;
     li.querySelector(".description").textContent =
-    descInput.value || "No description.";
+        descInput.value || "No description.";
 
     closeModal();
 }
@@ -190,5 +197,5 @@ clearInputBtns.forEach((btn) =>
         searchTasks();
     })
 );
-closeSidebarBtn.addEventListener('click', closeSidebar);
-darkmodeBtn.addEventListener('click', toggleDarkmode);
+closeSidebarBtn.addEventListener("click", closeSidebar);
+darkmodeBtn.addEventListener("click", toggleDarkmode);

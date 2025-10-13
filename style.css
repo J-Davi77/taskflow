@@ -43,7 +43,7 @@ body.darkmode {
     --shadow-btn: rgba(0, 0, 0, 0.3);
 }
 
-.disable-trasitions {
+.disable-transitions {
     transition: none !important;
 }
 
@@ -151,8 +151,12 @@ nav a {
     position: relative;
 }
 
+.disable-transitions .darkmode-btn {
+    transition: 0.2s !important;
+}
+
 .darkmode-btn:hover::before {
-    transform: translate(-50%, 180%) !important ;
+    transform: translate(-50%, 190%) !important;
 }
 
 .darkmode-btn:hover {
@@ -162,6 +166,10 @@ nav a {
 .theme-icon {
     position: absolute;
     transition: opacity 0.4s ease-out;
+}
+
+.disable-transitions .theme-icon {
+    transition: opacity 0.4s ease-out !important;
 }
 
 .sun {
